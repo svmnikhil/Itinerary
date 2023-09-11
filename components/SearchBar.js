@@ -20,8 +20,7 @@ export default function SearchBar({ onPress }) {
 
 
     return (
-    <TouchableOpacity
-        activeOpacity={1}
+    <View
         className="flex m-auto p-5 justify-center w-11/12 h-12 rounded-3xl bg-white drop-shadow-2xl border-black"
     >
             <Animated.View style={{ height }}className="items-center flex-row w-full">
@@ -33,6 +32,6 @@ export default function SearchBar({ onPress }) {
                         </View>
                     </TouchableOpacity>
             </Animated.View>
-    </TouchableOpacity>
+    </View>
     )
 }
