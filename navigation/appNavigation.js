@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigation() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='Explore'>
+        <Stack.Navigator initialRouteName='Profile'>
             <Stack.Screen name="Explore" options={{headerShown: false}} component={ExploreScreen} />
             <Stack.Screen name="Trip" options={{headerShown: false}} component={TripScreen} />
             <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />

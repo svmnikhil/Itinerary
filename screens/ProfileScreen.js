@@ -38,7 +38,7 @@ export default function ProfileScreen() {
         </View>
         <View className="flex-row mx-7 justify-left mb-10">
             <Text className= "font-light">Don't have an account? </Text>
-            <TouchableOpacity onPress={() => showModal(content)}>
+            <TouchableOpacity onPress={() => showModal(RegisterContent)}>
                 <Text className="underline">
                 Sign up
                 </Text>
