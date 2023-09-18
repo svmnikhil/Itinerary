@@ -4,7 +4,9 @@ import React, {useEffect, useState} from 'react';
 export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) {
 
   const initialTags = {
+    "Retreat": false,
     "Business": false,
+    "NightLife": false,
     "Leisure": false,
     "Explore": false,
     "Adventure": false,
@@ -37,7 +39,7 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
     return (
       <TouchableOpacity 
         onPress={() => toggleTag(text)} 
-        className="rounded-full py-2 px-4 my-1 mx-1"
+        className="rounded-full py-2 px-4 my-1 mx-0.5"
         style={{backgroundColor: tags[text] ? '#f97316' : '#d1d5db', alignSelf: 'flex-start'}}
       >
         <Text className="text-white">{text}</Text>
@@ -78,7 +80,7 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
         <Text className="m-2 font-medium text-xl">What does your trip look like?</Text>
       </TouchableOpacity>    
         <Text className= "font-light my-2 mx-2">What is the purpose of the trip?</Text>
-        <View className="mb-2 flex-row">
+        <View className="mb-2 flex-row flex-wrap">
             {renderTag("Business", tags["Business"])}
             {renderTag("Leisure", tags["Leisure"])}
             {renderTag("Explore", tags["Explore"])}
@@ -86,7 +88,7 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
         </View>
 
         <Text className= "font-light my-2 mx-2">How do you want to start your days?</Text>
-        <View className="flex-row">
+        <View className="flex-row flex-wrap">
           {renderTag("Early Riser", tags["EarlyRiser"])}
           {renderTag("Relaxed Morning", tags["RelaxedMorning"])}
           {renderTag("Both", tags["Both"])}
@@ -100,18 +102,20 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
         </View>
 
         <Text className= "font-light my-2 mx-2">Flexibility?</Text>
-        <View className="flex-row">
+        <View className="flex-row flex-wrap">
           {renderTag("Strict Schedule", tags["StrictSchedule"])}
           {renderTag("Very Flexible", tags["VeryFlexible"])}
         </View>
 
-        <Text className= "font-light my-2 mx-2">Interests and Preferences?</Text>
+        <Text className= "font-light my-2 mx-2 flex-wrap">Interests and Preferences?</Text>
         <View className="flex-row flex-wrap">
-          {renderTag("Museums", tags["Museums"])}
-          {renderTag("Outdoor Activities", tags["OutdoorActivities"])}
-          {renderTag("Historical Sites", tags["HistoricalSites"])}
+          {renderTag("Retreat", tags["Retreat"])}
           {renderTag("Local Markets", tags["LocalMarkets"])}
+          {renderTag("Nightlife", tags["Nightlife"])}
+          {renderTag("Outdoor Activities", tags["OutdoorActivities"])}
           {renderTag("Culinary Expeditions", tags["CulinaryExpeditions"])}
+          {renderTag("Historical Sites", tags["HistoricalSites"])}
+          {renderTag("Museums", tags["Museums"])}
         </View>
 
         <Text className= "font-light my-2 mx-2">Dietary Preferences?</Text>

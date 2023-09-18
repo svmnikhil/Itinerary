@@ -52,12 +52,12 @@ export default function DecideWho({ isExpanded, onToggle, onDataRecieved }) {
 
   const PeopleButton = ({peopleType, count}) => {
     return ( 
-      <View className="items-center justify-between flex-row mr-2">
+      <View className="items-center justify-between flex-row mr-10">
         <Text>{peopleType}</Text>
         <View className="flex-row items-center justify-between w-16 h-10 ">
-          <MinusCircleIcon opac onPress={() => changeCount(false, peopleType)} color="black"/>
-          <Text>{count}</Text>
-          <PlusCircleIcon onPress={() => changeCount(true, peopleType)} color="black"/>
+          <MinusCircleIcon size={38} onPress={() => changeCount(false, peopleType)} color="black"/>
+          <Text className="mx-2 text-lg">{count}</Text>
+          <PlusCircleIcon size={38} onPress={() => changeCount(true, peopleType)} color="black"/>
         </View>
       </View>
     );
@@ -75,18 +75,25 @@ export default function DecideWho({ isExpanded, onToggle, onDataRecieved }) {
   )
 
   const ExpandedContent = (
-    <TouchableOpacity
-      className="mx-5 my-2 p-5 items-center w-11/12 rounded-3xl bg-white drop-shadow-2xl border-black"
-      onPress={onToggle}
+    <View
+    className="mx-5 my-2 p-5 items-center w-11/12 rounded-3xl bg-white drop-shadow-2xl border-black"
     >
-      <Text className="font-medium text-2xl mb-5">Who's coming?</Text>
+      <TouchableOpacity 
+        onPress={onToggle}
+        hitSlop={{ top: 20, bottom: 20, left: 60, right: 140 }} 
+        >
+        <Text className="font-medium text-2xl mb-5">Who's coming?</Text>
+      </TouchableOpacity>
       <View className="w-full ml-2 justify-center">
         <PeopleButton peopleType="Seniors" count={seniors}/>
         <PeopleButton peopleType="Adults" count={adults}/>
         <PeopleButton peopleType="Children" count={children}/>
         <PeopleButton peopleType="Pets" count={pets}/>
       </View>
-    </TouchableOpacity>
+    </View>
+    
+      
+   
   )
 
   return isExpanded ? ExpandedContent : MinimizedContent;

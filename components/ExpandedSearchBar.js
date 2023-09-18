@@ -15,21 +15,22 @@ export default function ExpandedSearchBar({ onClose }) {
 
   const handleWhereData = (data) => {
     setWhereData(data);
-    console.log(data);
+    console.log(whereData);
   }
 
   const handleWhenData = (data) => {
     setWhenData(data);
-    console.log(data);
+    console.log(whenData);
   }
 
   const handleWhoData = (data) => {
     setWhoData(data);
-    console.log(data);
+    console.log(whoData);
   }
   
   const onConfirm = (data) => {
-    console.log(data);
+    setWhatData(data);
+    console.log(whatData);
   }
 
   const orange_color = '#f97316'
@@ -46,19 +47,24 @@ export default function ExpandedSearchBar({ onClose }) {
     <View className="flex-1 items-start">
       <TouchableOpacity 
         className="m-5" 
-        hitSlop={{ top: 580, bottom: 20, left: 60, right: 300}} 
+        hitSlop={{ top: 580, bottom: 20, left: 60, right: 380}} 
         onPress={onClose}>
       </TouchableOpacity>
-      <DecideWhere 
-        isExpanded={expandedComponent === "where"} 
-        onToggle={() => handleToggleExpand("where")} 
-        onDataRecieved={handleWhereData}
-        />
-      <DecideWhen 
-        isExpanded={expandedComponent === "when"} 
-        onToggle={() => handleToggleExpand("when")} 
-        onDataRecieved={handleWhenData}
-        />
+      {expandedComponent !== "what" && (
+      <>
+        <DecideWhere 
+          isExpanded={expandedComponent === "where"} 
+          onToggle={() => handleToggleExpand("where")} 
+          onDataRecieved={handleWhereData}
+          />
+        <DecideWhen 
+          isExpanded={expandedComponent === "when"} 
+          onToggle={() => handleToggleExpand("when")} 
+          onDataRecieved={handleWhenData}
+          />
+      </>
+    )}
+
       <DecideWho 
         isExpanded={expandedComponent === "who"} 
         onToggle={() => handleToggleExpand("who")}
