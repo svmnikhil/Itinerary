@@ -28,7 +28,6 @@ export default function SearchBar({ onPress }) {
                     <TouchableOpacity activeOpacity={0.5} hitSlop={{ top: 10, bottom: 10, left: 50, right: 100 }} onPress={handlePressIn}>
                         <View className="ml-5 flex-col items-start">
                             <Text className={pressed ? 'font-medium text-opacity-50' : 'font-medium'}>Let's create your itinerary</Text>
-                            {/* <Text className={pressed ? 'text-xs font-light text-opacity-50' : 'text-xs font-light'}>Anywhere · Any week · Add guests</Text> */}
                         </View>
                     </TouchableOpacity>
             </Animated.View>

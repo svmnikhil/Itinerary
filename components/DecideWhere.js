@@ -3,7 +3,7 @@ import {MagnifyingGlassIcon} from 'react-native-heroicons/outline';
 import React, {useEffect, useState} from 'react';
 
 export default function DecideWhere({ isExpanded, onToggle, onDataRecieved}) {
-    const [searchText, setSearchText] = useState("Nearby"); 
+    const [searchText, setSearchText] = useState(); 
     const orange_color = '#f97316';
 
     useEffect(() => {
@@ -31,10 +31,9 @@ export default function DecideWhere({ isExpanded, onToggle, onDataRecieved}) {
                 <Text className="font-medium text-2xl mb-5">Select your destination</Text>
             </TouchableOpacity>
             <View className="w-full items-center justify-center">
-                <View className="p-4 w-11/12 h-15 rounded-xl drop-shadow-2xl border-gray-400 border-2 flex-row">
-                    <MagnifyingGlassIcon size={18} color="black" strokeWidth={1.5}/>
-                        <TextInput className="pl-2" onChangeText={setSearchText} value={searchText}/>             
-                    <TextInput/>
+                <View className="p-4 w-11/12 h-15 rounded-xl drop-shadow-2xl border-gray-400 border-2 flex-row items-center">
+                    <MagnifyingGlassIcon size={18} color="black" strokeWidth={1.5} className="mr-2"/>
+                        <TextInput className="flex-1 h-full" placeholder="search" onChangeText={setSearchText} value={searchText}/>             
                 </View>
             </View>
         </View>

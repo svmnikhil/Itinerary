@@ -67,7 +67,7 @@ export default function DecideWhen({ isExpanded, onToggle, onDataRecieved}) {
           markingType={'period'}
           markedDates={getMarkedDates()}
           onDayPress={handleDayPress}
-          style={{ width: screenWidth * 0.9167 }}
+          style={{ width: screenWidth * 0.9167}}
         />
     </View>
 
