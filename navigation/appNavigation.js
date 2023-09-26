@@ -5,17 +5,23 @@ import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import ExploreScreen from '../screens/ExploreScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import TripScreen from '../screens/TripScreen';
+import TripDetailsScreen from '../screens/TripDetailsScreen';
 
 const Stack = createNativeStackNavigator();
+const TripStack = createNativeStackNavigator();
 
 export default function AppNavigation() {
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName='Profile'>
-            <Stack.Screen name="Explore" options={{headerShown: false}} component={ExploreScreen} />
-            <Stack.Screen name="Trip" options={{headerShown: false}} component={TripScreen} />
-            <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />
+            <Stack.Screen name="Explore" component={ExploreScreen} />
+            <TripStack.Navigator>
+              <TripStack.Screen name="Trip" component={TripScreen}/>
+              <TripStack.Screen name="TripDetails" component={TripDetailsScreen}/>
+            </TripStack.Navigator>
+            <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Navigator>
     </NavigationContainer>
   )
 }
+

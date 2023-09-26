@@ -5,14 +5,16 @@ import DecideWhat from './DecideWhat';
 import DecideWhen from './DecideWhen';
 import DecideWhere from './DecideWhere';
 import DecideWho from './DecideWho';
+import axios from 'axios';
 
 export default function ExpandedSearchBar({ onClose }) {
   const [expandedComponent, setExpandedComponent] = useState("where");
   const [whereData, setWhereData] = useState("Nearby");
-  const [whenData, setWhenData] = useState({"startDate": new Date(), "endDate": new Date()});
+  const [whenData, setWhenData] = useState({"startDate": new Date(), "endDate": new Date(), "days": 1});
   const [whoData, setWhoData] = useState({});
   const [whatData, setWhatData] = useState(null);
-
+  // I have 2 children and 2 adults, they are travelling to hyderabad for 10 days, these are their interests, these are their favourite places nearby,
+  // give me an 10 day itinerary
   const handleWhereData = (data) => {
     setWhereData(data);
     console.log(whereData);
@@ -30,7 +32,20 @@ export default function ExpandedSearchBar({ onClose }) {
   
   const onConfirm = (data) => {
     setWhatData(data);
-    console.log(whatData);
+    const queryData = {
+        whereData, 
+        whenData, 
+        whoData, 
+        whatData
+    };
+    
+    console.log(queryData);
+
+    try {
+      axios.post('http://10.0.0.8:8080/trips/generate', queryData);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const orange_color = '#f97316'

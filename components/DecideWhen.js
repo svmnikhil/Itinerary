@@ -3,15 +3,17 @@ import {Calendar} from 'react-native-calendars';
 import React, {useEffect, useState} from 'react';
 
 export default function DecideWhen({ isExpanded, onToggle, onDataRecieved}) {
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
-  const [range, setRange] = useState(null)
+  const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+  const [selectedEndDate, setSelectedEndDate] = useState(new Date());
+  const [days, setDays] = useState(1);
   
   useEffect(() => {
+
     onDataRecieved({
       "startDate": selectedStartDate,
-      "endDate": selectedEndDate});
-  },[selectedEndDate, selectedStartDate]);
+      "endDate": selectedEndDate,
+      "days": days});
+  },[selectedEndDate, selectedStartDate, days]);
   
   const screenWidth = Dimensions.get('window').width;
 
@@ -25,6 +27,9 @@ export default function DecideWhen({ isExpanded, onToggle, onDataRecieved}) {
   
       if (endTimestamp >= startTimestamp) {
         setSelectedEndDate(day.dateString);
+        const daysDifference = Math.floor((endTimestamp - startTimestamp) / (1000 * 60 * 60 * 24)) + 1; // +1 to include the start date
+        setDays(daysDifference);
+        console.log(days);
       } else {
         setSelectedEndDate(selectedStartDate);
         setSelectedStartDate(day.dateString);
@@ -37,7 +42,7 @@ export default function DecideWhen({ isExpanded, onToggle, onDataRecieved}) {
     if (selectedStartDate && selectedEndDate) {
       let current = new Date(selectedStartDate);
       let end = new Date(selectedEndDate);
-  
+
       while (current <= end) {
         const dateString = current.toISOString().split('T')[0];
         range[dateString] = { selected: true, color: '#5A67D8' }; // example color
@@ -46,7 +51,7 @@ export default function DecideWhen({ isExpanded, onToggle, onDataRecieved}) {
     } else if (selectedStartDate) {
       range[selectedStartDate] = { selected: true, color: '#5A67D8' };
     }
-  
+    
     return range;
   };
 

@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useContext } from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
 import {ChevronRightIcon} from 'react-native-heroicons/solid';
 import {Cog6ToothIcon, AdjustmentsHorizontalIcon, QuestionMarkCircleIcon} from 'react-native-heroicons/outline';
 import ModalContext from '../Modals/ModalContext';
@@ -10,7 +9,6 @@ import RegisterScreen from './RegisterScreen';
 
 
 export default function ProfileScreen() {
-  const navigation = useNavigation();
   const {showModal} = useContext(ModalContext);
 
   const RegisterContent = (
@@ -50,7 +48,7 @@ export default function ProfileScreen() {
             <View className="mx-7 border-b border-slate-400">
                 <TouchableOpacity 
                 className="py-3.5 justify-between items-center flex-row"
-                onPress={() => navigation.navigate('Explore')}
+                onPress={() => {}}
                 >
                     <View className="flex-row items-center">
                         <Cog6ToothIcon size={28} color="black" />
@@ -62,7 +60,7 @@ export default function ProfileScreen() {
             <View className="mx-7 border-b border-slate-400">
                 <TouchableOpacity 
                 className="py-3.5 justify-between items-center flex-row"
-                onPress={() => navigation.navigate('Login')}
+                onPress={() => {}}
                 >
                     <View className="flex-row items-center">
                         <AdjustmentsHorizontalIcon size={28} color="black" />
@@ -74,7 +72,7 @@ export default function ProfileScreen() {
             <View className="mx-7">
                 <TouchableOpacity 
                 className="py-3.5 justify-between items-center flex-row"
-                onPress={() => navigation.navigate('Explore')}
+                onPress={() => {}}
                 >
                     <View className="flex-row items-center">
                         <QuestionMarkCircleIcon size={28} color="black" />

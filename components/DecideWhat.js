@@ -17,6 +17,7 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
     "Moderate": false,
     "Downtime": false,
     "StrictSchedule": false,
+    "FlexibleSchedule": false,
     "VeryFlexible": false,
     "Museums": false,
     "OutdoorActivities": false,
@@ -104,6 +105,7 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
         <Text className= "font-light my-2 mx-2">Flexibility?</Text>
         <View className="flex-row flex-wrap">
           {renderTag("Strict Schedule", tags["StrictSchedule"])}
+          {renderTag("Flexible", tags["FlexibleSchedule"])}
           {renderTag("Very Flexible", tags["VeryFlexible"])}
         </View>
 

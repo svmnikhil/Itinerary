@@ -4,7 +4,6 @@ import Animated, {useSharedValue, withTiming, useAnimatedStyle, Easing} from 're
 import { Axios } from 'axios';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { React, useState, useContext, useRef, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import SearchBar from '../components/SearchBar';
 import ExpandedSearchBar from '../components/ExpandedSearchBar';
 
@@ -20,7 +19,6 @@ export default function ExploreScreen() {
   const apiKey = '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';
   const apiUrl = 'https://api.openai.com/v1/engines/gpt-3.5-turbo-16k/completions';
 
-  const navigation = useNavigation();
   const blurIntensity = useSharedValue(0); // animation value for blur intensity
   
 
