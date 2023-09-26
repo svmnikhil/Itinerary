@@ -21,7 +21,7 @@ export default function SearchBar({ onPress }) {
 
     return (
     <View
-        className="flex m-auto p-5 justify-center w-11/12 h-12 rounded-3xl bg-white drop-shadow-2xl border-black"
+        className="flex mx-auto p-5 justify-center w-11/12 h-12 rounded-3xl bg-white drop-shadow-2xl border-black"
     >
             <Animated.View style={{ height }}className="items-center flex-row w-full">
                 <MagnifyingGlassIcon size={18} color="black" strokeWidth={1.5}/>
