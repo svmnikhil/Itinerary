@@ -1,7 +1,6 @@
 import { Text, View, TouchableOpacity, Button } from 'react-native';
 import React from 'react';
 import MapView, {Marker} from 'react-native-maps';
-import LinearGradient from 'react-native-linear-gradient';
 import EventDetailsScreen from '../screens/EventDetailsScreen';
 import { useNavigation } from '@react-navigation/native';
 
