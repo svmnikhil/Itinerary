@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
-import AppNavigation from './navigation/appNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {MagnifyingGlassIcon, UserCircleIcon, MapIcon} from 'react-native-heroicons/outline';

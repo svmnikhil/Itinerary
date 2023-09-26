@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { ArrowLeftIcon } from 'react-native-heroicons/outline';
 import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';

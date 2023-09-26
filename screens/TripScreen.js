@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import React, { useContext } from 'react';
 import TripObject from '../components/TripObject';
 //import { useSelector, ReactReduxContext } from 'react-redux';
