@@ -1,11 +1,11 @@
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import React, { useState } from 'react';
 import EventObject from './EventObject';
 import { ChevronDownIcon, PencilSquareIcon, ChevronRightIcon} from 'react-native-heroicons/outline';
 
 export default function DayObject({description, events}) {
     const [isOpen, setIsOpen] = useState(true);
-
+    //console.log(events);
     const handleToggle = () => {
         setIsOpen(!isOpen);
     }

@@ -23,7 +23,7 @@ import EventDetailsScreen from './screens/EventDetailsScreen';
 
 
 export default function App() {
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(true);
   const Tab = createBottomTabNavigator();
   const TripStack = createNativeStackNavigator();
   // const dispatch = useDispatch();
@@ -40,50 +40,24 @@ export default function App() {
   }
 
   
-  React.useEffect(() => {
-    const loadResources = async() => {
-      try {
-        await cacheResources();
-      } catch (error) {
-        console.warn(error);
-      } finally {
-        setIsLoaded(true);
-      }
-    };
+  // React.useEffect(() => {
+  //   const loadResources = async() => {
+  //     try {
+  //       await cacheResources();
+  //     } catch (error) {
+  //       console.warn(error);
+  //     } finally {
+  //       setIsLoaded(true);
+  //     }
+  //   };
 
-    loadResources();
-  },[])
+  //   loadResources();
+  // },[])
 
   //SHOW THE SPLASH SCREEN IF STILL LOADING
   if(!isLoaded){
     return <SplashScreen />
   }
-
-  // const trips = [
-  //   { 
-  //     tripId: "trip0",
-  //     location: "Toronto, Canada",
-  //     tripPicture: null,
-  //     days: [
-  //       {
-  //         events: [
-  //           {
-  //               eventTitle: "Tandoori Flames",
-  //               eventDescription: "popular buffet specializing in high-quality indian food",
-  //               eventLocation: [43.612132, -79.694966],
-  //               eventContact: +19055028555,
-  //           },
-  //         ]
-  //       },
-  //     ],
-  //   },
-  // ]
-
-  // useEffect(() => {
-  //   const context = useContext(ReactReduxContext);
-  //   console.log(context);
-  //   dispatch(setTrips(trips)); // where trips is your hardcoded array
-  // }, []);
 
   //REACT NAVIGATION STUFF
   function TripNavigator() {
@@ -96,8 +70,8 @@ export default function App() {
     )
   }
 
-  
   return (
+    <Provider store={store}>
     <ModalProvider>
       <ModalComponent />
       <NavigationContainer>
@@ -144,7 +118,8 @@ export default function App() {
 
         </Tab.Navigator>
       </NavigationContainer>
-    </ModalProvider>   
+    </ModalProvider>
+    </Provider>
   );
 }
 

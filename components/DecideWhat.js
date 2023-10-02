@@ -1,40 +1,46 @@
 import {Text, View, TouchableOpacity, Button } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
-export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) {
+export default function DecideWhat({isExpanded, onToggle, onDataRecieved, onCancel, onConfirm}) {
 
-  const initialTags = {
+  let initalTags = {
     "Retreat": false,
     "Business": false,
-    "NightLife": false,
+    "Nightlife": false,
     "Leisure": false,
     "Explore": false,
     "Adventure": false,
-    "EarlyRiser": false,
-    "RelaxedMorning": false,
+    "Early Riser": false,
+    "Relaxed Morning": false,
     "DayStartBoth": false,
-    "PackedDays": false,
+    "Packed Days": false,
     "Moderate": false,
     "Downtime": false,
-    "StrictSchedule": false,
-    "FlexibleSchedule": false,
-    "VeryFlexible": false,
+    "Strict Schedule": false,
+    "Flexible": false,
+    "Very Flexible": false,
     "Museums": false,
-    "OutdoorActivities": false,
-    "HistoricalSites": false,
-    "LocalMarkets": false,
-    "CulinaryExpeditions": false,
-    "LocalFood": false,
+    "Outdoor Activities": false,
+    "Historical Sites": false,
+    "Local Markets": false,
+    "Culinary Expeditions": false,
+    "Local Food": false,
     "Vegan": false,
     "Vegetarian": false,
-    "OtherSpecify": false,
   };
+
+
+  const [tags, setTags] = useState(initalTags);
+  const [confirmPressed, setConfirmPressed] = useState(false);
+
 
   const handleConfirm = () => {
     onConfirm(tags);
   }
 
-  const [tags, setTags] = useState(initialTags);
+  useEffect(() => {
+    onDataRecieved(tags);
+  }, [tags]);
 
   const renderTag = (text) => {
     return (
@@ -105,7 +111,7 @@ export default function DecideWhat({isExpanded, onToggle, onCancel, onConfirm}) 
         <Text className= "font-light my-2 mx-2">Flexibility?</Text>
         <View className="flex-row flex-wrap">
           {renderTag("Strict Schedule", tags["StrictSchedule"])}
-          {renderTag("Flexible", tags["FlexibleSchedule"])}
+          {renderTag("Flexible", tags["Flexible"])}
           {renderTag("Very Flexible", tags["VeryFlexible"])}
         </View>
 

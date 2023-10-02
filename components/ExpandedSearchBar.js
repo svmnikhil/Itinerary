@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import { Text, View, TouchableOpacity, TextInput} from 'react-native';
 import {XCircleIcon, ArrowLeftCircleIcon} from 'react-native-heroicons/outline';
 import React, { useState } from 'react';
 import DecideWhat from './DecideWhat';
@@ -6,32 +6,40 @@ import DecideWhen from './DecideWhen';
 import DecideWhere from './DecideWhere';
 import DecideWho from './DecideWho';
 import axios from 'axios';
+import { useDispatch, useSelector} from 'react-redux';
+import { addTrip } from '../redux/slices/tripSlice/tripReducer';
 
 export default function ExpandedSearchBar({ onClose }) {
+  const dispatch = useDispatch();
+  //const trips = useSelector((state) => state.trip.trips); // adjust the state path based on your store configuration
+
   const [expandedComponent, setExpandedComponent] = useState("where");
   const [whereData, setWhereData] = useState("Nearby");
   const [whenData, setWhenData] = useState({"startDate": new Date(), "endDate": new Date(), "days": 1});
   const [whoData, setWhoData] = useState({});
-  const [whatData, setWhatData] = useState(null);
-  // I have 2 children and 2 adults, they are travelling to hyderabad for 10 days, these are their interests, these are their favourite places nearby,
-  // give me an 10 day itinerary
+  const [whatData, setWhatData] = useState({});
+
   const handleWhereData = (data) => {
     setWhereData(data);
-    console.log(whereData);
+    //console.log(whereData);
   }
 
   const handleWhenData = (data) => {
     setWhenData(data);
-    console.log(whenData);
+    //console.log(whenData);
   }
 
   const handleWhoData = (data) => {
     setWhoData(data);
-    console.log(whoData);
+    //console.log(whoData);
+  }
+  
+  const handleWhatData = (data) => {
+    setWhatData(data);
+    //console.log(whatData);
   }
   
   const onConfirm = (data) => {
-    setWhatData(data);
     const queryData = {
         whereData, 
         whenData, 
@@ -42,7 +50,11 @@ export default function ExpandedSearchBar({ onClose }) {
     console.log(queryData);
 
     try {
-      axios.post('http://10.0.0.8:8080/trips/generate', queryData);
+      axios.post('http://192.168.5.197:8080/trips/generate', queryData)
+      .then(response => {
+        const events = response.data.trip.events;
+        dispatch(addTrip({events, whereData}));
+    })
     } catch (error) {
       console.log(error);
     }
@@ -87,6 +99,7 @@ export default function ExpandedSearchBar({ onClose }) {
       <DecideWhat 
         isExpanded={expandedComponent === "what"} 
         onToggle={() => handleToggleExpand("what")} 
+        onDataRecieved={handleWhatData}
         onCancel={onClose}
         onConfirm={onConfirm}/>
     </View>

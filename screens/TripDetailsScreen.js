@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { Text, TouchableOpacity, View, Dimensions, ScrollView } from 'react-native';
 import { ArrowLeftIcon } from 'react-native-heroicons/outline';
 import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -8,15 +8,27 @@ import EventObject from '../components/EventObject';
 
 
 export default function TripDetailsScreen({route}) {
-  const days = route.params.days;
-
+  const events = route.params.tripObject.events;
+  const groupedByDay = events.reduce((acc, event) => {
+    // If the day doesn't exist in the accumulator, create an empty array for it.
+    if (!acc[event.day]) {
+      acc[event.day] = [];
+    }
+    // Push the event into the array for the appropriate day.
+    acc[event.day].push(event);
+    return acc;
+  }, {});
+  
+  // Convert the object to an array of arrays.
+  const days = Object.values(groupedByDay);
+  
   const navigator = useNavigation();
 
 
   const screenWidth = Dimensions.get('window').width;
 
   return (
-    <View className="flex-1">
+    <ScrollView className="flex-1">
       <Carousel
         loop
         width={screenWidth}
@@ -39,11 +51,11 @@ export default function TripDetailsScreen({route}) {
       </TouchableOpacity>
       {days.map((day, index) => (
         <View>
-          <DayObject key={index} description={day.description} events={day.events}/>
+          <DayObject key={index} description={day[0].day} events={day}/>
         </View>
       ))}
 
       
-    </View>
+    </ScrollView>
   )
 }
