@@ -7,6 +7,11 @@ const initialState = {
   error: null
 };
 
+const isValidEvent = (event) => {
+  // Replace this with your actual validation logic
+  return event && typeof event.name === 'string' && typeof event.date === 'string';
+};
+
 const eventSlice = createSlice({
   name: 'event',
   initialState,

@@ -15,10 +15,6 @@ export default function ExploreScreen() {
   const [isPressed, setIsPressed] = useState(false);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
 
-  
-  const apiKey = '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';
-  const apiUrl = 'https://api.openai.com/v1/engines/gpt-3.5-turbo-16k/completions';
-
   const blurIntensity = useSharedValue(0); // animation value for blur intensity
   
 

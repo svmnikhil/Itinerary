@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, ScrollView, Image} from 'react-native';
 import React from 'react';
 import { ArrowLeftIcon } from 'react-native-heroicons/outline';
 import { useNavigation } from '@react-navigation/native';
@@ -7,18 +7,26 @@ import Carousel from 'react-native-reanimated-carousel';
 
 
 export default function EventDetailsScreen({route}) {
-    const {eventTitle, eventContact, eventDescription, eventLocation, eventPrice, eventRatings} = route.params.eventDetails;
+    const {name, phone_number, gpt_description, location, price, rating, photos} = route.params.eventDetails;
     const navigator = useNavigation();
-
+    //console.log(photos);
     const screenWidth = Dimensions.get('window').width;
 
-    const detailWidget = () => {
-        <View className="bg-white">
-
-        </View>
+    const PhotoCarousel = ({photos}) => {
+        const screenWidth = 300; // replace with your screen width
+        if(!photos){
+            return {};
+        } else {
+            const imageURLs = photos.map(photo => {
+                const photoref = photo.photo_reference;
+                return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoref}&key=AIzaSyB0AEsLyMzuVSGRYRr6N1kvYuHsYnuMFNs`;
+                }
+            );
+            return imageURLs;
+        }
     }
-
-
+    const imageURLs = PhotoCarousel(photos);
+    console.log(imageURLs);
   return (
     <ScrollView className="flex-1 flex-col mx-2 mt-14">  
         <TouchableOpacity 
@@ -30,24 +38,26 @@ export default function EventDetailsScreen({route}) {
 
         <View className="mt-12 rounded-3xl bg-orange-300">
             <View className="items-center -top-6 rounded-3xl overflow-hidden mx-4 bg-white shadow">
-                <Carousel
-                    loop
-                    width={screenWidth}
-                    height={screenWidth/1.2}
-                    autoPlay={false}
-                    data={[...new Array(6).keys()]}
-                    scrollAnimationDuration={1000}
-                    onSnapToItem={(index) => console.log('current index:', index)}
-                    renderItem={({ index }) => (
-                    <View className="flex-1 justify-center">
-                        <Text className="text-xl text-center">{index}</Text>
+            <Carousel
+                loop
+                width={screenWidth}
+                height={screenWidth / 1.2}
+                autoPlay={false}
+                data={imageURLs}
+                onSnapToItem={(index) => console.log('current index:', index)}
+                renderItem={({ item }) => (
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <Image
+                            source={{ uri: item }}
+                            style={{ width: screenWidth, height: screenWidth / 1.2 }}
+                            resizeMode="cover"
+                        />
                     </View>
-                    )
-                }
-                />
+                )}
+            />
             </View>
             <View className="bg-white border-0.5 rounded-2xl p-5 h-auto mx-3">
-                    <Text className="flex-wrap">{eventDescription}</Text>
+                    <Text className="flex-wrap">{gpt_description}</Text>
             </View>
             {/* <View className="flex flex-row justify-between mt-2 mx-3">
                 <View className="bg-white border-0.5 rounded-2xl p-5 items-center">
@@ -56,9 +66,9 @@ export default function EventDetailsScreen({route}) {
             </View> */}
             <View className="flex flex-row justify-between mt-2 mx-3">
                 <View className="bg-white border-0.5 px-2 py-4 rounded-2xl items-start justify-center w-auto h-auto flex-col">
-                    <Text className="my-1">Contact number: {eventContact}</Text>
-                    <Text className="my-1">Price: {eventPrice}</Text>
-                    <Text className="my-1">Ratings: {eventRatings}</Text>
+                    <Text className="my-1">Contact number: {phone_number}</Text>
+                    <Text className="my-1">Price: {price}</Text>
+                    <Text className="my-1">Ratings: {rating}</Text>
 
                 </View>
                 <View className="bg-white border-0.5 p-2 rounded-2xl w-40 h-40 items-center">
@@ -67,18 +77,18 @@ export default function EventDetailsScreen({route}) {
                             height: '100%',  
                         }}
                         initialRegion={{
-                            latitude: Number(eventLocation[0]),
-                            longitude: Number(eventLocation[1]),
+                            latitude: Number(location[0]),
+                            longitude: Number(location[1]),
                             latitudeDelta: 0.01,
                             longitudeDelta: 0.01,
                         }}
                     >
                         <Marker
                             coordinate={{
-                            latitude: Number(eventLocation[0]),
-                            longitude: Number(eventLocation[1]),
+                            latitude: Number(location[0]),
+                            longitude: Number(location[1]),
                             }}
-                            title={eventTitle} // Optional title for the marker
+                            title={name} // Optional title for the marker
                         />
                     </MapView>
                 </View>

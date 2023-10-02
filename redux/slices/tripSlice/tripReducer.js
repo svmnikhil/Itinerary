@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';  // You will need to install 'uuid' package for generating unique ids
 
 const initialState = {
   trips: [],
@@ -11,12 +12,21 @@ const tripSlice = createSlice({
   initialState,
   reducers: {
     addTrip: (state, action) => {
-      state.trips.push(action.payload);
+      const newTrip = {
+        id: uuidv4(),
+        events: action.payload.events,
+        where: action.payload.whereData
+      }
+      state.trips.push(newTrip);
     },
+
+    removeTrip: (state, action) => {
+      state.trips = state.trips.filter(trip => trip.id !== action.payload.id);
+    },
+
     setTrips: (state, action) => {
       state.trips = action.payload;
     },
-    // ... other reducers
   },
   // Optional: if using createAsyncThunk, you can also handle those actions here
   extraReducers: (builder) => {
@@ -26,6 +36,6 @@ const tripSlice = createSlice({
   },
 });
 
-export const { addTrip, setTrips } = tripSlice.actions;
+export const { addTrip, removeTrip, setTrips } = tripSlice.actions;
 
 export default tripSlice.reducer;

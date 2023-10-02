@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import React, { useContext } from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ChevronRightIcon} from 'react-native-heroicons/solid';

@@ -5,7 +5,7 @@ import EventDetailsScreen from '../screens/EventDetailsScreen';
 import { useNavigation } from '@react-navigation/native';
 
 export default function EventObject({eventData}) {
-    const {eventTitle, eventContact, eventDescription, eventLocation, eventPrice, eventRatings} = eventData;
+    const {name, phone_number, gpt_description, location, price, rating} = eventData;
     const navigator = useNavigation();
 
     const handleEventDetails = () => {
@@ -14,19 +14,19 @@ export default function EventObject({eventData}) {
   return (
     <View className="flex-row">
         <View className="flex-1">
-            <Text className="my-2 text-xl font-semibold">{eventTitle}</Text>
+            <Text className="my-2 text-xl font-semibold">{name}</Text>
             <View className="flex flex-row h-28 bg-white rounded-2xl shadow-md">
                 <TouchableOpacity className="ml-2 mt-2 flex-col flex items-start" activeOpacity={0.7} onPress={handleEventDetails}>
-                    <Text className="flex w-60 text-xs">{eventDescription}</Text>
+                    {/* <Text className="flex w-60 text-xs">{gpt_description}</Text> */}
                     <View className="flex flex-row w-60 mt-4">
                         <View className="flex flex-col mr-7">
-                            <Text>Ratings: {eventRatings}</Text>
+                            <Text>Ratings: {rating}</Text>
                             <TouchableOpacity>
-                                <Text>{eventContact}</Text>
+                                <Text>{phone_number}</Text>
                             </TouchableOpacity>
                         </View>
                         <View className="flex flex-col">
-                        <Text>Price: {eventPrice}</Text>
+                        <Text>Price: {price}</Text>
                             
                             <TouchableOpacity>
                                 <Text>Book for me</Text>
@@ -42,18 +42,18 @@ export default function EventObject({eventData}) {
                             height: '120%',  
                         }}
                         initialRegion={{
-                            latitude: Number(eventLocation[0]),
-                            longitude: Number(eventLocation[1]),
+                            latitude: Number(location[0]),
+                            longitude: Number(location[1]),
                             latitudeDelta: 0.01,
                             longitudeDelta: 0.01,
                         }}
                     >
                         <Marker
                             coordinate={{
-                            latitude: Number(eventLocation[0]),
-                            longitude: Number(eventLocation[1]),
+                            latitude: Number(location[0]),
+                            longitude: Number(location[1]),
                             }}
-                            title={eventTitle} // Optional title for the marker
+                            title={name} // Optional title for the marker
                         />
                     </MapView>
             
