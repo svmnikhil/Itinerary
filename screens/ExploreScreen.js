@@ -1,5 +1,4 @@
 import { Text, View, TouchableOpacity, Image, Keyboard, Platform } from 'react-native';
-import { BlurView } from 'expo-blur';
 import Animated, {useSharedValue, withTiming, useAnimatedStyle, Easing} from 'react-native-reanimated';
 import { Axios } from 'axios';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -62,13 +61,13 @@ export default function ExploreScreen() {
       keyboardHideSubscription.remove();
     };
   }, []);
-  
+
 
   return (
     <SafeAreaView className="flex-1 relative">
-        <BlurView intensity={0} className="flex-1">
+        <View className="flex-1">
           <Image className="flex m-auto" source={require("../assets/logo.png")}/>
-        </BlurView>
+        </View>
         {isPressed ? (
         <View className={`absolute top-90 left-0 right-0 ${keyboardOffset ? 'bottom-20' : 'bottom-10'} z-10`}>
           <ExpandedSearchBar onClose={handleClose}/> 

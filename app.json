@@ -4,19 +4,23 @@
     "slug": "Itinerary",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "plugins": [
+      "expo-apple-authentication"
+    ],
     "userInterfaceStyle": "light",
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "com.app.Itinerary",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
-        "backgroundColor": "#ffffff"
-      }
+      "package": "com.app.Itinerary"
     },
     "web": {
       "favicon": "./assets/logo.png"
