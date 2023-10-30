@@ -14,6 +14,7 @@ const tripSlice = createSlice({
     addTrip: (state, action) => {
       const newTrip = {
         id: uuidv4(),
+        cityPictures: action.payload.cityPictures,
         events: action.payload.events,
         where: action.payload.whereData
       }

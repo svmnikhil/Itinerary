@@ -41,18 +41,15 @@ export default function EventDetailsScreen({route}) {
             <Carousel
                 loop
                 width={screenWidth}
-                height={screenWidth / 1.2}
+                height={screenWidth/1.5}
                 autoPlay={false}
-                data={imageURLs}
+                data={[...new Array(6).keys()]}
+                scrollAnimationDuration={1000}
                 onSnapToItem={(index) => console.log('current index:', index)}
-                renderItem={({ item }) => (
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Image
-                            source={{ uri: item }}
-                            style={{ width: screenWidth, height: screenWidth / 1.2 }}
-                            resizeMode="cover"
-                        />
-                    </View>
+                renderItem={({ index }) => (
+                <View className="flex-1 border-0.5 justify-center">
+                    <Text className="text-xl text-center">{index}</Text>
+                </View>
                 )}
             />
             </View>

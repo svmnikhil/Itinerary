@@ -50,10 +50,13 @@ export default function ExpandedSearchBar({ onClose }) {
     console.log(queryData);
 
     try {
-      axios.post('http://192.168.5.197:8080/trips/generate', queryData)
+      axios.post('http://10.0.0.8:8080/trips/generate', queryData)
       .then(response => {
+        console.log(response.data.trip.cityPictures);
+        console.log(response.data.trip.events);
+        const locationPictures = response.data.trip.cityPictures;
         const events = response.data.trip.events;
-        dispatch(addTrip({events, whereData}));
+        dispatch(addTrip({cityPictures, events, whereData}));
     })
     } catch (error) {
       console.log(error);
